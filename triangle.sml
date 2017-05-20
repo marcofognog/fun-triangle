@@ -27,8 +27,8 @@ fun solve_lines (line1 : (int*int) list, line2 : int list) =
   else solve_simple(hd(line1), hd(line2)) :: solve_lines(tl(line1), tl(line2))
 
 fun resolve (lines : (int list) list) =
-  if null(tl(hd(lines)))
-  then hd(hd(lines))
+  if null(tl(lines))
+  then hd(lines)
   else resolve(solve_lines(to_pairs(hd(lines)), hd(tl(lines))) :: tl(lines))
 
 fun triangle (l : int list list) =
