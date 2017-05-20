@@ -26,10 +26,13 @@ fun solve_lines (line1 : (int*int) list, line2 : int list) =
   then []
   else solve_simple(hd(line1), hd(line2)) :: solve_lines(tl(line1), tl(line2))
 
+fun faz (lines : (int list) list) =
+  solve_lines(to_pairs(hd(lines)), hd(tl(lines))) :: tl(tl(lines))
+
 fun resolve (lines : (int list) list) =
   if null(tl(lines))
   then hd(lines)
-  else resolve(solve_lines(to_pairs(hd(lines)), hd(tl(lines))) :: tl(lines))
+  else resolve(faz(lines))
 
 fun triangle (l : int list list) =
   resolve(invert(l))
