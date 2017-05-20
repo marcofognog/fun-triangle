@@ -21,17 +21,15 @@ fun to_pairs (l : int list) =
 fun solve_simple (p : int*int, el : int) =
   gr(p) + el
 
-fun solve_lines (line1 : int*int list, line2 : int list) =
+fun solve_lines (line1 : (int*int) list, line2 : int list) =
   if null line2
   then []
   else solve_simple(hd(line1), hd(line2)) :: solve_lines(tl(line1), tl(line2))
 
-                                                      (*
-fun resolve (l : int list list) =
-  if only_one_element(line[0])
-  then hd line[0]
-  else resolve(solve_lines(to_pairs(lines[0]), lines[1]) :: tl lines)
+fun resolve (lines : (int list) list) =
+  if null(tl(hd(lines)))
+  then hd(hd(lines))
+  else resolve(solve_lines(to_pairs(hd(lines)), hd(tl(lines))) :: tl(lines))
 
 fun triangle (l : int list list) =
   resolve(invert(l))
-*)
