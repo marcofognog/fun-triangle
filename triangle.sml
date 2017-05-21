@@ -1,3 +1,6 @@
+CM.make "$smlnj-tdp/back-trace.cm";
+SMLofNJ.Internals.TDP.mode := true;
+
 fun append (one : 'a list, two : 'a list) =
     if null one
     then two
