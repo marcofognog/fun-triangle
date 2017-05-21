@@ -17,15 +17,15 @@ fun gr (p : int*int) =
   else #2 p
 
 fun to_pairs (l : int list) =
-  if null l
+  if null(l) orelse null(tl(l)) 
   then []
-  else ((hd l), (hd (tl l))) :: to_pairs(tl (tl l))
+  else ((hd l), (hd (tl l))) :: to_pairs(tl(l))
 
 fun solve_simple (p : int*int, el : int) =
   gr(p) + el
 
 fun solve_lines (line1 : (int*int) list, line2 : int list) =
-  if null line2
+  if null(line1)
   then []
   else solve_simple(hd(line1), hd(line2)) :: solve_lines(tl(line1), tl(line2))
 
