@@ -12,9 +12,7 @@ fun invert (xs : 'a list list) =
   else append(invert(tl xs), [(hd xs)])
 
 fun gr (p : int*int) =
-  if #1 p > #2 p
-  then #1 p
-  else #2 p
+  Int.max(#1 p, #2 p)
 
 fun to_pairs (l : int list) =
   if null(l) orelse null(tl(l)) 
