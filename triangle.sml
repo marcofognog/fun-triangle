@@ -7,17 +7,17 @@ fun append (one : 'a list, two : 'a list) =
     else (hd one) :: append(tl one, two)
 
 fun invert (xs : 'a list list) =
-  if null xs
-  then []
-  else append(invert(tl xs), [(hd xs)])
+  case xs of
+  [] => []
+| x::xs => append(invert(xs), [(x)])
 
-fun gr (p : int*int) =
-  Int.max(#1 p, #2 p)
+fun gr (p1,p2) = Int.max(p1, p1)
 
 fun to_pairs (l : int list) =
-  if null(l) orelse null(tl(l)) 
-  then []
-  else ((hd l), (hd (tl l))) :: to_pairs(tl(l))
+  case l of
+      [] => []
+    | [x] => []
+    | x::xs => (x, hd(xs)) :: to_pairs(xs)
 
 fun solve_simple (p : int*int, el : int) =
   gr(p) + el
