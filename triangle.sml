@@ -21,26 +21,27 @@ fun solve_lines (line1 : (int*int) list, line2 : int list) =
         | x::xs => solve_simple(x, hd(line2)) :: solve_lines(xs, tl(line2))
   end
 
-fun generate_new_tree (lines : (int list) list) =
+fun new_tree (lines : (int list) list) =
   let
       fun first (lines : (int list) list) = hd(lines)
       fun second (lines : (int list) list) = hd(tl(lines))
+      fun the_rest (lines : (int list) list) = tl(tl(lines))
   in
-      solve_lines(to_pairs(first(lines)), second(lines)) :: tl(tl(lines))
+      solve_lines(to_pairs(first(lines)), second(lines)) :: the_rest(lines)
   end
 
 fun resolve (lines : (int list) list) =
   case lines of
       [] => []
     | [i] => i
-    | x::xs => resolve(generate_new_tree(x::xs))
+    | x::xs => resolve(new_tree(x::xs))
 
 fun triangle (l : int list list) =
   let
       fun invert (xs : 'a list list) =
         case xs of
             [] => []
-          | x::xs => append(invert(xs), [(x)])
+          | x::xs => append(invert(xs), [x])
   in
       resolve(invert(l))
   end;
