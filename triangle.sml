@@ -46,4 +46,17 @@ fun triangle (l : int list list) =
       hd(resolve(invert(l)))
   end;
 
+(* Tests *)
 val res1 = triangle([[6],[3,5],[9,7,1],[4,6,8,4]]) = 26;
+val res2 = triangle([[1],[1,1],[1,1,1],[1,1,1,1]]) = 4;
+
+val res3 = triangle([[1],[2,1],[3,1,1],[1,1,1,100]]) = 103;
+val res3 = triangle([[1],[2,1],[3,1,1],[1,1,100,1]]) = 104;
+val res3 = triangle([[1],[2,1],[3,1,1],[1,100,1,1]]) = 106;
+val res3 = triangle([[1],[2,1],[3,1,1],[100,1,1,1]]) = 106;
+
+val res4 = to_pairs([1,2]) = [(1,2)];
+val res5 = to_pairs([1,2,3]) = [(1,2),(2,3)];
+val res6 = to_pairs([1,2,3,4]) = [(1,2),(2,3),(3,4)];
+val res4 = to_pairs([1]) = [];
+val res4 = to_pairs([]) = [];
