@@ -11,7 +11,7 @@ fun invert (xs : 'a list list) =
   [] => []
 | x::xs => append(invert(xs), [(x)])
 
-fun gr (p1,p2) = Int.max(p1, p1)
+fun gr (p1,p2) = Int.max(p1, p2)
 
 fun to_pairs (l : int list) =
   case l of
