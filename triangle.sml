@@ -2,14 +2,14 @@ CM.make "$smlnj-tdp/back-trace.cm";
 SMLofNJ.Internals.TDP.mode := true;
 
 fun append (one : 'a list, two : 'a list) =
-    if null one
-    then two
-    else (hd one) :: append(tl one, two)
+  case one of
+      [] => two
+    | x::xs => x :: append(xs, two)
 
 fun invert (xs : 'a list list) =
   case xs of
-  [] => []
-| x::xs => append(invert(xs), [(x)])
+      [] => []
+    | x::xs => append(invert(xs), [(x)])
 
 fun gr (p1,p2) = Int.max(p1, p2)
 
@@ -23,23 +23,22 @@ fun solve_simple (p : int*int, el : int) =
   gr(p) + el
 
 fun solve_lines (line1 : (int*int) list, line2 : int list) =
-  if null(line1)
-  then []
-  else solve_simple(hd(line1), hd(line2)) :: solve_lines(tl(line1), tl(line2))
+  case line1 of
+      [] => []
+    | x::xs => solve_simple(x, hd(line2)) :: solve_lines(xs, tl(line2))
 
-fun first (lines : (int list) list) =
-  hd(lines)
+fun first (lines : (int list) list) = hd(lines)
 
-fun second (lines : (int list) list) =
-  hd(tl(lines))
+fun second (lines : (int list) list) = hd(tl(lines))
 
 fun generate_new_tree (lines : (int list) list) =
   solve_lines(to_pairs(first(lines)), second(lines)) :: tl(tl(lines))
 
 fun resolve (lines : (int list) list) =
-  if null(tl(lines))
-  then hd(lines)
-  else resolve(generate_new_tree(lines))
+  case lines of
+      [] => []
+    | [i] => i
+    | x::xs => resolve(generate_new_tree(x::xs))
 
-fun triangle (l : int list list) =
-  resolve(invert(l))
+fun triangle (l : int list list) = resolve(invert(l));
+
