@@ -43,6 +43,7 @@ fun triangle (l : int list list) =
             [] => []
           | x::xs => append(invert(xs), [x])
   in
-      resolve(invert(l))
+      hd(resolve(invert(l)))
   end;
 
+val res1 = triangle([[6],[3,5],[9,7,1],[4,6,8,4]]) = 26;
