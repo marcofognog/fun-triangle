@@ -34,9 +34,13 @@ fun resolve (lines : (int list) list) =
 fun triangle (l : int list list) =
   let
       fun invert (xs : 'a list list) =
-        case xs of
-            [] => []
-          | x::xs => invert(xs) @ [x]
+        let fun aux(n, acc) =
+        case n of
+            [] => acc
+          | x::xs' => aux(xs', x::acc)
+        in
+            aux(xs, [])
+        end
   in
       hd(resolve(invert(l)))
   end;
