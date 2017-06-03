@@ -1,13 +1,13 @@
 CM.make "$smlnj-tdp/back-trace.cm";
 SMLofNJ.Internals.TDP.mode := true;
 
-fun to_pairs (l : int list) =
+fun to_pairs (l) =
   case l of
       [] => []
     | [x] => []
     | x::xs => (x, hd(xs)) :: to_pairs(xs)
 
-fun solve_lines (line1 : (int*int) list, line2 : int list) =
+fun solve_lines (line1, line2) =
   let
       fun solve_simple ((p1,p2), el) = Int.max(p1, p2) + el
   in
@@ -16,7 +16,7 @@ fun solve_lines (line1 : (int*int) list, line2 : int list) =
         | x::xs => solve_simple(x, hd(line2)) :: solve_lines(xs, tl(line2))
   end
 
-fun new_tree (lines : (int list) list) =
+fun new_tree (lines) =
   let
       fun first (lines : (int list) list) = hd(lines)
       fun second (lines : (int list) list) = hd(tl(lines))
@@ -25,15 +25,15 @@ fun new_tree (lines : (int list) list) =
       solve_lines(to_pairs(first(lines)), second(lines)) :: the_rest(lines)
   end
 
-fun resolve (lines : (int list) list) =
+fun resolve (lines) =
   case lines of
       [] => []
     | [i] => i
     | x::xs => resolve(new_tree(x::xs))
 
-fun triangle (l : int list list) =
+fun triangle (l) =
   let
-      fun invert (xs : 'a list list) =
+      fun invert (xs) =
         let fun aux(n, acc) =
         case n of
             [] => acc
