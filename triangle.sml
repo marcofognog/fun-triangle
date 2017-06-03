@@ -16,14 +16,8 @@ fun solve_lines (line1, line2) =
         | x::xs => solve_simple(x, hd(line2)) :: solve_lines(xs, tl(line2))
   end
 
-fun new_tree (lines) =
-  let
-      fun first (lines : (int list) list) = hd(lines)
-      fun second (lines : (int list) list) = hd(tl(lines))
-      fun the_rest (lines : (int list) list) = tl(tl(lines))
-  in
-      solve_lines(to_pairs(first(lines)), second(lines)) :: the_rest(lines)
-  end
+fun new_tree (first::second::the_rest) =
+  solve_lines(to_pairs(first), second) :: the_rest
 
 fun resolve (lines) =
   case lines of
