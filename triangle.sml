@@ -1,11 +1,6 @@
 CM.make "$smlnj-tdp/back-trace.cm";
 SMLofNJ.Internals.TDP.mode := true;
 
-fun append (one : 'a list, two : 'a list) =
-  case one of
-      [] => two
-    | x::xs => x :: append(xs, two)
-
 fun to_pairs (l : int list) =
   case l of
       [] => []
@@ -41,7 +36,7 @@ fun triangle (l : int list list) =
       fun invert (xs : 'a list list) =
         case xs of
             [] => []
-          | x::xs => append(invert(xs), [x])
+          | x::xs => invert(xs) @ [x]
   in
       hd(resolve(invert(l)))
   end;
