@@ -26,18 +26,7 @@ fun resolve (lines) =
     | x::xs => resolve(new_tree(x::xs))
 
 fun triangle (l) =
-  let
-      fun invert (xs) =
-        let fun aux(n, acc) =
-        case n of
-            [] => acc
-          | x::xs' => aux(xs', x::acc)
-        in
-            aux(xs, [])
-        end
-  in
-      hd(resolve(invert(l)))
-  end;
+  hd(resolve(List.rev(l)));
 
 (* Tests *)
 val res1 = triangle([[6],[3,5],[9,7,1],[4,6,8,4]]) = 26;
