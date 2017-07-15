@@ -16,12 +16,13 @@ fun traverse (f, lines) =
   case lines of
       [] => []
     | [i] => i
-    | first::second::the_rest => traverse(f, solve_lines(f, to_pairs(first), second) :: the_rest)
+    | first::second::the_rest =>
+      traverse(f, solve_lines(f, to_pairs(first), second) :: the_rest)
 
 fun triangle (l) =
-  let fun solve_simple ((p1,p2), el) = Int.max(p1, p2) + el
+  let fun sum_greatest ((p1,p2), el) = Int.max(p1, p2) + el
   in
-      hd(traverse(solve_simple, List.rev(l)))
+      hd(traverse(sum_greatest, List.rev(l)))
   end
 
 (* Tests *)
