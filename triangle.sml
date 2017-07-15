@@ -1,6 +1,9 @@
 CM.make "$smlnj-tdp/back-trace.cm";
 SMLofNJ.Internals.TDP.mode := true;
 
+structure Triangle =
+struct
+
 fun to_pairs (l) =
   case l of
       [] => []
@@ -22,10 +25,12 @@ fun traverse (f, lines) =
 fun fold (f, l) =
   hd(traverse(f, List.rev(l)))
 
+end
+
 fun triangle (l) =
   let fun sum_greatest ((p1,p2), el) = Int.max(p1, p2) + el
   in
-      fold(sum_greatest, l)
+      Triangle.fold(sum_greatest, l)
   end
 
 (* Tests *)
