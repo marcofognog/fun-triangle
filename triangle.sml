@@ -19,10 +19,13 @@ fun traverse (f, lines) =
     | first::second::the_rest =>
       traverse(f, solve_lines(f, to_pairs(first), second) :: the_rest)
 
+fun fold (f, l) =
+  hd(traverse(f, List.rev(l)))
+
 fun triangle (l) =
   let fun sum_greatest ((p1,p2), el) = Int.max(p1, p2) + el
   in
-      hd(traverse(sum_greatest, List.rev(l)))
+      fold(sum_greatest, l)
   end
 
 (* Tests *)
