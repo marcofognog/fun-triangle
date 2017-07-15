@@ -7,26 +7,21 @@ fun to_pairs (l) =
     | [x] => []
     | x::xs => (x, hd(xs)) :: to_pairs(xs)
 
-fun solve_lines (line1, line2) =
-  let
-      fun solve_simple ((p1,p2), el) = Int.max(p1, p2) + el
-  in
+fun solve_simple ((p1,p2), el) = Int.max(p1, p2) + el
+
+fun solve_lines (f, line1, line2) =
       case line1 of
           [] => []
-        | x::xs => solve_simple(x, hd(line2)) :: solve_lines(xs, tl(line2))
-  end
+        | x::xs => f(x, hd(line2)) :: solve_lines(f, xs, tl(line2))
 
-fun new_tree (first::second::the_rest) =
-  solve_lines(to_pairs(first), second) :: the_rest
-
-fun resolve (lines) =
+fun traverse (f, lines) =
   case lines of
       [] => []
     | [i] => i
-    | x::xs => resolve(new_tree(x::xs))
+    | first::second::the_rest => traverse(f, solve_lines(f, to_pairs(first), second) :: the_rest)
 
 fun triangle (l) =
-  hd(resolve(List.rev(l)));
+  hd(traverse(solve_simple, List.rev(l)));
 
 (* Tests *)
 val res1 = triangle([[6],[3,5],[9,7,1],[4,6,8,4]]) = 26;
