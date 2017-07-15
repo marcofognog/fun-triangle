@@ -42,8 +42,8 @@ val res32 = triangle([[1],[2,1],[3,1,1],[1,1,100,1]]) = 104;
 val res33 = triangle([[1],[2,1],[3,1,1],[1,100,1,1]]) = 106;
 val res34 = triangle([[1],[2,1],[3,1,1],[100,1,1,1]]) = 106;
 
-val res4 = to_pairs([1,2]) = [(1,2)];
-val res5 = to_pairs([1,2,3]) = [(1,2),(2,3)];
-val res6 = to_pairs([1,2,3,4]) = [(1,2),(2,3),(3,4)];
-val res7 = to_pairs([1]) = [];
-val res8 = to_pairs([]) = [];
+val res4 = Triangle.to_pairs([1,2]) = [(1,2)];
+val res5 = Triangle.to_pairs([1,2,3]) = [(1,2),(2,3)];
+val res6 = Triangle.to_pairs([1,2,3,4]) = [(1,2),(2,3),(3,4)];
+val res7 = Triangle.to_pairs([1]) = [];
+val res8 = Triangle.to_pairs([]) = [];
